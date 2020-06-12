@@ -7,6 +7,11 @@ public class AddressBookManagement {
     // 0. Define basic fields and methods
     public boolean processFinalized = false;
     public Scanner scanner = new Scanner(System.in);
+    private String txtFilePath;
+
+    public AddressBookManagement(String txtFilePath) {
+        this.txtFilePath = txtFilePath;
+    }
 
     // 1. Define the address book
     AddressBook addressBook = new AddressBook();
@@ -36,7 +41,7 @@ public class AddressBookManagement {
                         this.addContact();
                         break;
                     case 2:
-                        this.addressBook.displayEntries();
+                        this.addressBook.displayEntries(txtFilePath);
                         break;
                     case 3:
                         this.removeContact();
@@ -209,7 +214,7 @@ public class AddressBookManagement {
 
     private void removeContact(){
         System.out.println("\nRemove contact:\n");
-        addressBook.displayEntries();
+        addressBook.displayEntries(txtFilePath);
         int numEntries = addressBook.numberOfContacts();
 
         String indexRemoveItemMessage = "Which contact do you want to delete? \n (Please select insert the Item-selector number )";
@@ -226,7 +231,7 @@ public class AddressBookManagement {
 
     private void editContact(){
         System.out.println("\nEdit contacs:\n");
-        addressBook.displayEntries();
+        addressBook.displayEntries(txtFilePath);
         int numEntries = addressBook.numberOfContacts();
 
         String indexRemoveItemMessage = "Which contact do you want to edit? \n (Please select insert the Item-selector number )";

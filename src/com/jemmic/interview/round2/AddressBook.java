@@ -282,7 +282,7 @@ public class AddressBook {
     }
 
     // 3.1 Display entries alphabetically by surname
-    public void displayEntries(){
+    public void displayEntries(String txtFilePath){
 
         // sorting algorithm
         Collections.sort(addressBook, AddressBookEntry.entrySurnameComparator);
@@ -300,7 +300,7 @@ public class AddressBook {
 
 
        // save list to txt-file
-        saveEntriesToTxt("/home/alan/Desktop", addressBook);
+        saveEntriesToTxt(txtFilePath, addressBook);
 
     }
 
