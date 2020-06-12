@@ -36,7 +36,8 @@ public class AddressBookEntryFriends extends AddressBookEntry{
                         "e-mail : "+ this.getEmail() + "\n" +
                         "age : "+ this.getAge() + "\n" +
                         "hair : "+ this.getHairColor() + "\n" +
-                        "type: friend"
+                        "type: friend" +
+                        "years befriended: " + yearsBefriended
                 ;
 
         String confirmationMessageAge =

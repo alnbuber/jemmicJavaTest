@@ -1,9 +1,5 @@
 package com.jemmic.interview.round2;
 
-import com.jemmic.interview.round2.entities.AddressBookEntry;
-import com.jemmic.interview.round2.entities.FamilyRelationship;
-
-import java.io.StringReader;
 import java.util.Scanner;
 
 public class AddressBookManagement {
