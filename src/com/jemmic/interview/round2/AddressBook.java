@@ -4,20 +4,17 @@ import com.jemmic.interview.round2.entities.AddressBookEntry;
 import com.jemmic.interview.round2.entities.AddressBookEntryAcquitance;
 import com.jemmic.interview.round2.entities.AddressBookEntryFamily;
 import com.jemmic.interview.round2.entities.AddressBookEntryFriends;
-import com.jemmic.interview.round2.entities.FamilyRelationship;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class AddressBook {
 
@@ -293,7 +290,14 @@ public class AddressBook {
         // print the items
         System.out.println( "\n----------------------\n" +
                 "The adress book contains the following entries:\n");
-        addressBook.stream().forEach(entry -> System.out.println(entry.toString()));
+
+        AtomicInteger pos = new AtomicInteger(1);
+        addressBook.stream().forEach(entry -> {
+            System.out.println("\n======================\n Item-selector: "
+                                + pos + entry.toString());
+            pos.getAndIncrement();
+        });
+
 
        // save list to txt-file
         saveEntriesToTxt("/home/alan/Desktop", addressBook);
@@ -315,13 +319,22 @@ public class AddressBook {
     }
 
     // 4.1 remove items
-    public void removeEntry(){
+    public void removeEntry(int index){
+        try {
+            this.addressBook.remove(index);
+        } catch (IndexOutOfBoundsException exception) {
+
+        }
 
     }
 
     // 5.1 edit item
-    public void removeItem() {
+    public void editEntry() {
         
+    }
+
+    public int numberOfContacts() {
+        return this.addressBook.size();
     }
 
 

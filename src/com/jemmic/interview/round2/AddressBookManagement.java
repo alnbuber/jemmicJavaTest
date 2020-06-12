@@ -42,7 +42,7 @@ public class AddressBookManagement {
                         this.addressBook.displayEntries();
                         break;
                     case 3:
-                        System.out.println("\nRemove items:\n");
+                        this.removeContact();
                         break;
                     case 4:
                         System.out.println("\nEdit items:\n");
@@ -210,5 +210,23 @@ public class AddressBookManagement {
 
     }
 
+    private void removeContact(){
+        System.out.println("\nRemove items:\n");
+        addressBook.displayEntries();
+        int numEntries = addressBook.numberOfContacts();
 
+        String indexRemoveItemMessage = "Which contact do you want to delete? \n (Please select insert the Item-selector number )";
+        int indexRemoveItem = scanIntegerMethod(indexRemoveItemMessage);
+
+        try {
+            if(numEntries>0 && indexRemoveItem-1<=numEntries){
+                addressBook.removeEntry(indexRemoveItem);
+            }
+        } catch (IndexOutOfBoundsException exception) {
+
+        }
+
+
+
+    }
 }
