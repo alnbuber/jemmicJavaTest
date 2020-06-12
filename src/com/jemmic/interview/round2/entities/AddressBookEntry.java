@@ -1,6 +1,8 @@
 package com.jemmic.interview.round2.entities;
 
-public abstract class AddressBookEntry {
+import java.util.Comparator;
+
+public abstract class AddressBookEntry implements Comparable<AddressBookEntry> {
 
     // mandatory fields
     private String name;
@@ -68,4 +70,22 @@ public abstract class AddressBookEntry {
     public void setHairColor(String hairColor) {
         this.hair = hairColor;
     }
+
+    // comparable
+    @Override
+    public int compareTo(AddressBookEntry o) {
+        return this.getSurname().compareTo(o.getSurname());
+    }
+
+    /*Comparator for sorting the list by Student Name*/
+    public static Comparator<AddressBookEntry> entrySurnameComparator = new Comparator<AddressBookEntry>() {
+
+        public int compare(AddressBookEntry e1, AddressBookEntry e2) {
+            String entrySurname1 = e1.getSurname().toUpperCase();
+            String entrySurname2 = e2.getSurname().toUpperCase();
+
+            //ascending order
+            return entrySurname1.compareTo(entrySurname2);
+
+        }};
 }

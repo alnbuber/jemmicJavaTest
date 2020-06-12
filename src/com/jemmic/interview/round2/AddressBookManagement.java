@@ -1,5 +1,7 @@
 package com.jemmic.interview.round2;
 
+import com.jemmic.interview.round2.entities.FamilyRelationship;
+
 import java.io.StringReader;
 import java.util.Scanner;
 
@@ -15,7 +17,8 @@ public class AddressBookManagement {
     // 2. Define the methods
     public void runApp() {
         while(!processFinalized){
-            String generalMessage = "Please select one of the following options by typing in the respective number:\n" +
+            String generalMessage = "\n--------------------------------\n" +
+                    "Please select one of the following options by typing in the respective number:\n" +
                     "0. cancel\n" +
                     "1. Add new contact\n" +
                     "2. Display all contacts\n" +
@@ -36,13 +39,13 @@ public class AddressBookManagement {
                         this.addContact();
                         break;
                     case 2:
-                        System.out.println();
+                        this.addressBook.displayEntries();
                         break;
                     case 3:
-                        System.out.println();
+                        System.out.println("\nRemove items:\n");
                         break;
                     case 4:
-                        System.out.println();
+                        System.out.println("\nEdit items:\n");
                         break;
                 }
 
@@ -154,19 +157,50 @@ public class AddressBookManagement {
             System.out.println("You selected option: " + category + ".");
 
             switch (category) {
+
+                // acquaintance
                 case 1:
-                    System.out.println("acquaintance");
-                    this.addressBook.addEntryAcquaintance(name, surname, telephoneNumber, mail, ag);
+                    this.addressBook.addEntryAcquaintance(name, surname, telephoneNumber, mail, age, hair);
                     break;
+
+                // family
                 case 2:
                     System.out.println("family");
+
+                    // Find out about the relationship-type
+                    String familyRelationship = "";
+                    String familyTypeMessage =
+                            "The contact belongs to one of the following categories:\n" +
+                                    "(select one of the options by typing in the respective number):\n" +
+                                    "1. parent\n" +
+                                    "2. grandparent\n" +
+                                    "3. son or daughter\n"+
+                                    "4. aunt or uncle\n";
+                    int familyTypeNumber = scanIntegerMethod(familyTypeMessage);
+                    switch (familyTypeNumber){
+                        case 1:
+                            familyRelationship = "parent";
+                            break;
+                        case 2:
+                            familyRelationship = "grandparent";
+                            break;
+                        case 3:
+                            familyRelationship = "son or daughter";
+                            break;
+                        case 4:
+                            familyRelationship = "aunt or uncle";
+                            break;
+                    }
+
+                    this.addressBook.addEntryFamily(name, surname, telephoneNumber, mail, age, hair, familyRelationship );
                     break;
+
+                // friend
                 case 3:
-                    System.out.println("friend");
-
-
-
-
+                    String friendshipStartYearMessage =
+                            "Since which year are you friends ?\n";
+                    int friendshipStartYear = scanIntegerMethod(friendshipStartYearMessage);
+                    this.addressBook.addEntryFriends(name, surname, telephoneNumber, mail, age, hair, friendshipStartYear);
                     break;
             }
         } else {
