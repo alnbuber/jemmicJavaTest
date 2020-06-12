@@ -1,5 +1,6 @@
 package com.jemmic.interview.round2;
 
+import com.jemmic.interview.round2.entities.AddressBookEntry;
 import com.jemmic.interview.round2.entities.FamilyRelationship;
 
 import java.io.StringReader;
@@ -45,7 +46,7 @@ public class AddressBookManagement {
                         this.removeContact();
                         break;
                     case 4:
-                        System.out.println("\nEdit items:\n");
+                        this.editContact();
                         break;
                 }
 
@@ -211,7 +212,7 @@ public class AddressBookManagement {
     }
 
     private void removeContact(){
-        System.out.println("\nRemove items:\n");
+        System.out.println("\nRemove contact:\n");
         addressBook.displayEntries();
         int numEntries = addressBook.numberOfContacts();
 
@@ -225,8 +226,45 @@ public class AddressBookManagement {
         } catch (IndexOutOfBoundsException exception) {
 
         }
+    }
 
+    private void editContact(){
+        System.out.println("\nEdit contacs:\n");
+        addressBook.displayEntries();
+        int numEntries = addressBook.numberOfContacts();
 
+        String indexRemoveItemMessage = "Which contact do you want to edit? \n (Please select insert the Item-selector number )";
+        int indexEditItem = scanIntegerMethod(indexRemoveItemMessage);
 
+        String indexEditFieldMessage = "Which contact do you want to edit? \n" +
+                "(Please select insert the Item-selector number )\n"+
+                "1. name\n" +
+                "2. surname\n" +
+                "3. telephone\n" +
+                "4. e-mail\n" +
+                "5. age\n" +
+                "6. hair"
+                ;
+
+        int indexEditField = scanIntegerMethod(indexEditFieldMessage);
+
+        String newFieldContentMessageInput = "Which should be the new content? \n (Please type in the new value.)";
+        String newFieldContentMessageOutput = "The new value of the field is: ";
+        String newFieldContent = scanStringsMethod(newFieldContentMessageInput, newFieldContentMessageOutput);
+
+        try {
+            if(numEntries>0 && indexEditItem-1<=numEntries){
+
+                if(indexEditField>0 && indexEditField<7) {
+                    this.addressBook.setAddressBook(
+                            addressBook.editEntry(indexEditItem , indexEditField, newFieldContent)
+                    );
+
+                }
+
+            }
+        } catch (IndexOutOfBoundsException exception) {
+
+        }
     }
 }

@@ -325,17 +325,59 @@ public class AddressBook {
         } catch (IndexOutOfBoundsException exception) {
 
         }
-
     }
 
     // 5.1 edit item
-    public void editEntry() {
-        
+    public List<AddressBookEntry> editEntry(int index, int fieldIndex, String newFieldContent) {
+        try {
+            switch (fieldIndex ) {
+                // 1. name
+                case 1:
+                    this.addressBook.get(index).setName(newFieldContent);
+                    break;
+                // 2. surname
+                case 2:
+                    this.addressBook.get(index).setSurname(newFieldContent);
+                    break;
+                // 3. telephone
+                case 3:
+                    this.addressBook.get(index).setTelephoneNumber(newFieldContent);
+                    break;
+                // e-mail
+                case 4:
+                    this.addressBook.get(index).setEmail(newFieldContent);
+                    break;
+                // age
+                case 5:
+                    int newAge = 0;
+                    try{
+                        newAge = Integer.parseInt(newFieldContent);
+                    } catch (Exception e) {
+
+                    }
+                    this.addressBook.get(index).setAge(newAge);
+                    break;
+                // hair
+                case 6:
+                    this.addressBook.get(index).setHairColor(newFieldContent);
+                    break;
+            }
+
+        } catch (IndexOutOfBoundsException exception) {
+
+        }
+        return this.addressBook;
     }
 
     public int numberOfContacts() {
         return this.addressBook.size();
     }
 
+    public List<AddressBookEntry> getAddressBook() {
+        return addressBook;
+    }
 
+    public void setAddressBook(List<AddressBookEntry> addressBook) {
+        this.addressBook = addressBook;
+    }
 }
